@@ -1,0 +1,39 @@
+﻿@page "/"
+
+@using Syncfusion.Blazor.Inputs
+@using System.ComponentModel.DataAnnotations
+
+<div>
+    <table style="margin-top: 30px">
+        <tr>
+            <td> <b> Enter your name : </b></td>
+            <td>
+                <SfInPlaceEditor @bind-Value="Example.Name" TValue="string">
+                    <EditorComponent>
+                        <EditForm Model="@Example">
+                            <DataAnnotationsValidator></DataAnnotationsValidator>
+                            <SfTextBox @bind-Value="Example.Name"></SfTextBox>
+                            <ValidationMessage For=@(() => Example.Name) />
+                        </EditForm>
+                    </EditorComponent>
+                </SfInPlaceEditor>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@code { 
+
+    public class ValidationModel {
+
+        [Required]
+        [StringLength(10, ErrorMessage = "Name is too long")]
+        public string Name { get; set; } = "Andrew";
+
+
+    }
+    private ValidationModel Example = new ValidationModel();
+
+
+
+}
